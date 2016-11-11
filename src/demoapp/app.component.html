@@ -1,0 +1,38 @@
+<div class="app">
+  <h1> RxSocket Demo App </h1>
+  <div class="columns">
+    <div>
+      <h2>Outgoing messages</h2>
+      <p> Input a message into the below text box and click "Send". </p>
+      <textarea [(ngModel)]="message"></textarea>
+      <div class="actions">
+        <input type="button" value="Send" (click)="send()"/>
+      </div>
+    </div>
+
+    <div>
+      <h2> Incoming Messages </h2>
+      <p>
+        <strong> Last message received: </strong>
+        <em *ngIf="!!(latestMessage$ | async)">
+          (at {{(latestMessage$ | async)?.date}})
+        </em>
+      </p>
+      <blockquote>
+        {{ (latestMessage$ | async)?.message }}
+      </blockquote>
+
+      <hr />
+      <p>
+        <strong> Message Log: </strong>
+      </p>
+
+      <blockquote *ngFor="let payload of (messages$ | async)">
+        <em>{{payload.date}}</em>
+        {{payload.message}}
+      </blockquote>
+
+    </div>
+
+  </div>
+</div>

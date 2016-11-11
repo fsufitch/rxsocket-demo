@@ -1,0 +1,55 @@
+{
+  "name": "rxsocket-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --content-base dist/ --inline --watch",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fsufitch/rxsocket-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fsufitch/rxsocket-demo/issues"
+  },
+  "homepage": "https://github.com/fsufitch/rxsocket-demo#readme",
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/core-js": "^0.9.34",
+    "@types/node": "^6.0.46",
+    "awesome-typescript-loader": "^2.2.4",
+    "concurrently": "^3.1.0",
+    "css-loader": "^0.25.0",
+    "css-to-string-loader": "^0.1.2",
+    "html-loader": "^0.4.4",
+    "json-loader": "^0.5.4",
+    "lite-server": "^2.2.2",
+    "node-sass": "^3.11.2",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^4.0.2",
+    "typescript": "^2.0.9",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2",
+    "yaml-loader": "^0.4.0"
+  },
+  "dependencies": {
+    "@angular/common": "~2.1.1",
+    "@angular/compiler": "~2.1.1",
+    "@angular/core": "~2.1.1",
+    "@angular/forms": "~2.1.1",
+    "@angular/http": "~2.1.1",
+    "@angular/platform-browser": "~2.1.1",
+    "@angular/platform-browser-dynamic": "~2.1.1",
+    "@angular/router": "~3.1.1",
+    "@angular/upgrade": "~2.1.1",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "^5.0.0-rc.2",
+    "rxsocket": "^1.0.4",
+    "zone.js": "^0.6.25"
+  }
+}
