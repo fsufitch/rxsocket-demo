@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { RxWebSocket } from 'rxsocket';
 
+
+import { DemoSocket } from './demo.socket';
 let remoteURL = require('./remote-config.yaml').url;
 
 interface Payload {
@@ -11,34 +12,17 @@ interface Payload {
 
 @Injectable()
 export class EchoService {
-  private _connection: RxWebSocket<Payload>;
+  private _socket: DemoSocket;
 
-  private _serializePayload(payload: Payload): string {
-    return JSON.stringify({
-      message: payload.message,
-      date: payload.date.valueOf(),
-    });
-  }
-
-  private _deserializePayload(data: string): Payload {
-    let parsed = JSON.parse(data);
-    return {
-      message: <string>parsed.message,
-      date: new Date(parsed.date),
-    };
-  }
-
-  private get lazyConnection() {
-    if (!this._connection) {
-      this._connection = new RxWebSocket<Payload>(remoteURL);
-      this._connection.deserialize = this._deserializePayload;
-      this._connection.serialize = this._serializePayload;
+  private get lazySocket() {
+    if (!this._socket) {
+      this._socket = new DemoSocket(remoteURL);
     }
-    return this._connection;
+    return this._socket;
   }
 
   getMessageStream() {
-    return this.lazyConnection.incoming;
+    return this.lazySocket.incoming.share();
   }
 
   getMessagesAggregate() {
@@ -47,6 +31,6 @@ export class EchoService {
 
   sendMessage(message: string) {
     let payload: Payload = {message, date: new Date()};
-    this.lazyConnection.outgoing.next(payload);
+    this.lazySocket.outgoing.next(payload);
   }
 }

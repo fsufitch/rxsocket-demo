@@ -16,17 +16,20 @@ div.columns {
     display: flex;
     flex: 1;
     flex-flow: column nowrap;
-    align-items: stretch;
+    justify-content: space-around;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    > div.actions {
+      display: flex;
+      flex: 0;
+      flex-flow: row;
+      justify-content: flex-end;
+      font-size: 16pt;
+    }
   }
 }
 
 textarea {
   flex: 1;
   min-height: 10em;
-}
-
-div.actions {
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-end;
 }

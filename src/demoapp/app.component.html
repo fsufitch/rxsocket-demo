@@ -4,9 +4,9 @@
     <div>
       <h2>Outgoing messages</h2>
       <p> Input a message into the below text box and click "Send". </p>
-      <textarea [(ngModel)]="message"></textarea>
+      <textarea #messageInput></textarea>
       <div class="actions">
-        <input type="button" value="Send" (click)="send()"/>
+        <input type="button" value="Send" (click)="send(messageInput.value)"/>
       </div>
     </div>
 
@@ -14,12 +14,12 @@
       <h2> Incoming Messages </h2>
       <p>
         <strong> Last message received: </strong>
-        <em *ngIf="!!(latestMessage$ | async)">
-          (at {{(latestMessage$ | async)?.date}})
-        </em>
       </p>
-      <blockquote>
-        {{ (latestMessage$ | async)?.message }}
+      <blockquote *ngIf="(latestMessage$ | async) !== null">
+        {{ latestMessage$ | async }}
+      </blockquote>
+      <blockquote *ngIf="(latestMessage$ | async) === null">
+        (no messages received yet)
       </blockquote>
 
       <hr />
@@ -27,11 +27,10 @@
         <strong> Message Log: </strong>
       </p>
 
-      <blockquote *ngFor="let payload of (messages$ | async)">
-        <em>{{payload.date}}</em>
+      <blockquote *ngFor="let payload of (payloads$ | async)">
+        <em>{{payload.date | date:'mediumTime'}}</em>
         {{payload.message}}
       </blockquote>
-
     </div>
 
   </div>

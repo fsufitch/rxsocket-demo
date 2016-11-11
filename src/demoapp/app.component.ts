@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { EchoService } from './echo.service';
 
@@ -8,16 +9,18 @@ import { EchoService } from './echo.service';
   styles: [require('./app.component.scss')],
 })
 export class AppComponent {
-  latestMessage$ = this.echoService.getMessageStream();
-  messages$ = this.echoService.getMessagesAggregate();
-
-  message = '';
+  latestMessage$ = new BehaviorSubject<string>(null);
+  payloads$ = this.echoService.getMessagesAggregate();
 
   constructor(
     private echoService: EchoService
-  ) {}
+  ) {
+    this.echoService.getMessageStream()
+      .map(payload => payload.message)
+      .subscribe(this.latestMessage$);
+  }
 
-  send() {
-    this.echoService.sendMessage(this.message);
+  send(message: string) {
+    this.echoService.sendMessage(message);
   }
 }

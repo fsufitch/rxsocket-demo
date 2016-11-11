@@ -25,7 +25,9 @@ module.exports = {
     tls: "empty",
   },
 
+  externals: [ "ws" ],
   module: {
+    noParse: [ "ws" ],
     loaders: [
       { test: /\.tsx?$/, loader: 'awesome-typescript-loader?tsconfig=src/tsconfig.json' },
       { test: /\.s?css/, loader: 'css-to-string!css!sass'},
